@@ -17,6 +17,7 @@ export class SidebarComponent {
   template: `
     <div id="article">
       <h2>{{ article.title }}</h2>
+      <p>{{ article.description }}</p>
     </div>
   `
 })
@@ -32,9 +33,7 @@ export class ArticleComponent {
     <div id="container">
       <div id="content">
         <app-article [article]='article'></app-article>
-        <app-article></app-article>
-        <app-article></app-article>
-        <app-article></app-article>
+        <app-article [article]='article'></app-article>
       </div>
     </div>
   `,
@@ -42,6 +41,7 @@ export class ArticleComponent {
 })
 export class AppComponent {
   article: Object;
+  title = 'Ronh';
 
   constructor() {
     this.article = {
