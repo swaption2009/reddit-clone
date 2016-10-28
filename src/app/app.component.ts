@@ -13,15 +13,25 @@ export class SidebarComponent {
 }
 
 @Component({
+  selector: 'app-article',
+  template: `
+    <div id="sidebar">
+      Articles will go here
+    </div>
+  `
+})
+export class ArticleComponent {
+
+}
+
+@Component({
   selector: 'app-root',
   templateUrl: `
     <h1>Hello, {{ title }}</h1>
     <app-sidebar></app-sidebar>
     <div id="container">
       <div id="content">
-        <div>
-          Content will go here
-        </div>
+        <app-article></app-article>
       </div>
     </div>
   `,
