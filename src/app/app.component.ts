@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-sidebar',
@@ -15,13 +15,13 @@ export class SidebarComponent {
 @Component({
   selector: 'app-article',
   template: `
-    <div id="sidebar">
-      Articles will go here
+    <div id="article">
+      <h2>{{ article.title }}</h2>
     </div>
   `
 })
 export class ArticleComponent {
-
+  @Input('article') article: Object;
 }
 
 @Component({
@@ -31,6 +31,9 @@ export class ArticleComponent {
     <app-sidebar></app-sidebar>
     <div id="container">
       <div id="content">
+        <app-article [article]='article'></app-article>
+        <app-article></app-article>
+        <app-article></app-article>
         <app-article></app-article>
       </div>
     </div>
@@ -38,5 +41,12 @@ export class ArticleComponent {
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Ron!';
+  article: Object;
+
+  constructor() {
+    this.article = {
+      title: 'The Angular 2 screencast',
+      description: 'The easiest way to learn Angular 2'
+    }
+  }
 }
