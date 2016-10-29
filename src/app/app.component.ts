@@ -22,7 +22,7 @@ export class SidebarComponent {
   `
 })
 export class ArticleComponent {
-  @Input('article') article: Object;
+  @Input() article: Object;
 }
 
 @Component({
@@ -32,21 +32,28 @@ export class ArticleComponent {
     <app-sidebar></app-sidebar>
     <div id="container">
       <div id="content">
-        <app-article [article]='article'></app-article>
-        <app-article [article]='article'></app-article>
+        <app-article 
+          *ngFor="let article of articles"
+          [article]='article'></app-article>
       </div>
     </div>
   `,
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  article: Object;
-  title = 'Ronh';
+  articles: Object[];
+  title = 'Ron';
 
   constructor() {
-    this.article = {
+    this.articles = [{
       title: 'The Angular 2 screencast',
       description: 'The easiest way to learn Angular 2'
-    }
+    }, {
+      title: 'Fullstack React',
+      description: 'Let\'s learn React'
+    }, {
+      title: 'Vue is new',
+      description: 'Vue 2.0 is lightweight'
+    }];
   }
 }
