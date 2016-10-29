@@ -1,5 +1,12 @@
 import { Component, Input } from '@angular/core';
 
+class Article {
+  constructor(
+    public title: string,
+    public description: string
+  ){}
+}
+
 @Component({
   selector: 'app-sidebar',
   template: `
@@ -22,7 +29,8 @@ export class SidebarComponent {
   `
 })
 export class ArticleComponent {
-  @Input() article: Object;
+  @Input() article: Article;
+
 }
 
 @Component({
@@ -41,19 +49,22 @@ export class ArticleComponent {
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  articles: Object[];
+  articles: Article[];
   title = 'Ron';
 
   constructor() {
-    this.articles = [{
-      title: 'The Angular 2 screencast',
-      description: 'The easiest way to learn Angular 2'
-    }, {
-      title: 'Fullstack React',
-      description: 'Let\'s learn React'
-    }, {
-      title: 'Vue is new',
-      description: 'Vue 2.0 is lightweight'
-    }];
+    this.articles = [
+      new Article(
+      'The Angular 2 screencast',
+      'The easiest way to learn Angular 2'
+      ),
+      new Article(
+      'Fullstack React',
+      'Let\'s learn React'
+      ),
+      new Article(
+      'Vue is new',
+      'Vue 2.0 is lightweight'
+      )];
   }
 }
