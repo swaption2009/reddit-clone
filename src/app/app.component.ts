@@ -1,13 +1,23 @@
 import { Component, Input } from '@angular/core';
 
 class Article {
+  public publishedAt: Date;
+
   constructor(
     public title: string,
-    public description: string
-  ){}
+    public description: string,
+    public votes?: number
+  ){
+    this.votes = votes || 0;
+    this.publishedAt = new Date();
+  }
 
-    public date(): Date {
-      return new Date();
+    public voteUp(): void {
+      this.votes = this.votes + 1;
+    }
+
+    public voteDown(): void {
+      this.votes = this.votes - 1;
     }
 }
 
@@ -34,10 +44,29 @@ export class SidebarComponent {
         {{ article.title }}
       </div>
       <div class="meta">
-        Voting and votes will go here
+        <span class="ui blue small label">
+          <i class="heart icon"></i>
+          <div class="detail">
+            {{ article.votes }}
+          </div>
+        </span>
+        <span class="ui right floated">
+          <a
+            (click)="upvote()"
+            class="ui small label">
+            <i class="arrow up icon"></i>
+            upvote
+          </a>
+          <a
+            (click)="downvote()"
+            class="ui small label">
+            <i class="arrow down icon"></i>
+            downvote
+          </a>
+        </span>
       </div>
       <div class="meta date">
-        {{ article.date() | date: 'medium' }}
+        {{ article.publishedAt | date: 'medium' }}
       </div>
       <div class="meta description">
         <p>
@@ -59,6 +88,15 @@ export class SidebarComponent {
 export class ArticleComponent {
   @Input() article: Article;
 
+  upvote() {
+    console.log("upvote is clicked");
+    this.article.voteUp();
+  }
+
+  downvote() {
+    console.log("downvote is clicked");
+    this.article.voteDown();
+  }
 }
 
 @Component({
@@ -84,15 +122,18 @@ export class AppComponent {
     this.articles = [
       new Article(
       'The Angular 2 screencast',
-      'The easiest way to learn Angular 2'
+      'The easiest way to learn Angular 2',
+        10
       ),
       new Article(
       'Fullstack React',
-      'Let\'s learn React'
+      'Let\'s learn React',
+        8
       ),
       new Article(
       'Vue is new',
-      'Vue 2.0 is lightweight'
+      'Vue 2.0 is lightweight',
+        15
       )];
   }
 }
