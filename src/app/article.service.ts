@@ -6,8 +6,8 @@ export class ArticleService {
 
   constructor() { }
 
-  public getArticles(): Article[] {
-    return [
+  public getArticles(): Promise<Article[]> {
+    return Promise.resolve([
       new Article(
         'The Angular 2 screencast',
         'The easiest way to learn Angular 2',
@@ -22,7 +22,8 @@ export class ArticleService {
         'Vue is new',
         'Vue 2.0 is lightweight',
         15
-      )];
+      )
+    ]);
   }
 
 }
