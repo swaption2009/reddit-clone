@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Article }                  from '../article';
 import { ArticleService }           from '../article.service';
 
@@ -12,12 +12,11 @@ export class ArticleListComponent implements OnInit {
 
   constructor(
     private articleService: ArticleService
-  ) {
-    articleService.getArticles()
-      .then(articles => this.articles = articles);
-  }
+  ) { }
 
   ngOnInit() {
+    this.articleService.getArticles()
+      .then(articles => this.articles = articles);
   }
 
 }
