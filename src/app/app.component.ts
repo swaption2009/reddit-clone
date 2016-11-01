@@ -8,7 +8,6 @@ import { Article }          from './article';
 })
 export class AppComponent {
   articles: Article[];
-  title = 'Ron';
 
   constructor() {
     this.articles = [
