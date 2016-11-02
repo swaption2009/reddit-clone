@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ArticleService} from "../article.service";
 
 declare var jQuery: any;
 
@@ -12,7 +13,9 @@ export class ArticleListHeaderComponent implements OnInit {
   private currentFilter: string = 'Time';
   private sortDirection: number = 1;
 
-  constructor() { }
+  constructor(
+    private articleService: ArticleService
+  ) { }
 
   ngOnInit() {
     jQuery('.ui.dropdown').dropdown();
@@ -32,6 +35,11 @@ export class ArticleListHeaderComponent implements OnInit {
       this.currentFilter = filter;
       this._updateSort();
     }
+  }
+
+  liveSearch(evt) {
+    const val = evt.target.value;
+    this.articleService.filterBy(val);
   }
 
   _updateSort() {
