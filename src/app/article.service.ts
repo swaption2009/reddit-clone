@@ -1,10 +1,8 @@
 import { Injectable }             from '@angular/core';
 import { Article }                from './article';
+import { environment }            from '../environments/environment';
 import { Http, URLSearchParams }  from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-
-const baseUrl = 'https://newsapi.org';
-const newsApiKey = '793984372a2b4aad9dddc711b810b1cf';
 
 @Injectable()
 export class ArticleService {
@@ -15,11 +13,11 @@ export class ArticleService {
 
   public getArticles(): Promise<Article[]> {
     let params = new URLSearchParams();
-    params.set('apiKey', newsApiKey);
+    params.set('apiKey', environment.newsApiKey);
     params.set('source', 'reddit-r-all');
 
     return this.http
-      .get(`${baseUrl}/v1/articles`, {
+      .get(`${environment.baseUrl}/v1/articles`, {
         search: params
       })
       .toPromise()
