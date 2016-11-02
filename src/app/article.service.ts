@@ -110,7 +110,7 @@ export class ArticleService {
       });
   }
 
-  public getSources(): void {
+  public getSources(sourceKey = 'reddit-r-all'): void {
     this._makeHttpRequest('/v1/sources')
       .map(json => json.sources)
       .filter(list => list.length > 0)
