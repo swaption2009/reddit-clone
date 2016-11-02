@@ -10,12 +10,24 @@ import 'rxjs/add/operator/toPromise';
 export class ArticleService {
   private _articles: BehaviorSubject<Article[]> =
     new BehaviorSubject<Article[]>([]);
+  private _sortByDirectionSubject: BehaviorSubject<number> = new BehaviorSubject<number>(1);
+  private _sortByFilterSubject: BehaviorSubject<ArticleSortOrderFn> = new BehaviorSubject<ArticleSortOrderFn>(sortByTime);
 
   public articles: Observable<Article[]> = this._articles.asObservable();
+  public orderedArticles: Observable<Article[]>;
 
   constructor(
     private http: Http
   ) { }
+
+  public sortBy(
+    filter: string,
+    direction: number
+  ): void {
+    this._sortByDirectionSubject.next(direction);
+    this._sortByFilterSubject
+      .next(sortFns[filter]);
+  }
 
   public getArticles(): void {
     // make http request -> observable
